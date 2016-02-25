@@ -9,13 +9,14 @@ const SubMenu = Menu.SubMenu
 
 import './Sidebar.less'
 
+const defaultProps = {
+  items: [],
+  currentIndex: 0
+}
+
 const propTypes = {
   items: PropTypes.array,
   currentIndex: PropTypes.number
-};
-
-const defaultProps = {
-  currentIndex: 0
 }
 
 class Sidebar extends React.Component {
@@ -23,28 +24,31 @@ class Sidebar extends React.Component {
     super(props)
   }
 
-  componentWillMount () {
+  componentDidMount () {
     this.props.getAllMenu()
   }
 
   render () {
     const { items } = this.props
+    let openKey = []
+    const menu = items.map((item, index) => {
+      openKey.push('sub'+index)
+      return (
+        <SubMenu key={'sub'+index} title={<span><Icon type={item.icon} />{item.name}</span>}>
+          {item.child.map((node, key) => {
+            return (
+              <Menu.Item key={index+'-'+key}>{node.name}</Menu.Item>
+            )
+          })}
+        </SubMenu>
+      )
+    });
+    console.log(openKey)
     return (
       <aside className="ant-layout-sider">
         <div className="ant-layout-logo"></div>
-        <Menu mode="inline" theme="dark"
-          defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
-          {items.map((item, index) => {
-            return (
-              <SubMenu key={'sub'+index} title={<span><Icon type={item.icon} />{item.name}</span>}>
-                {item.child.map((node, key) => {
-                  return (
-                    <Menu.Item key={index+'-'+key}>{node.name}</Menu.Item>
-                  )
-                })}
-              </SubMenu>
-            )
-          })}
+        <Menu mode="inline" theme="dark" openKeys={openKey}>
+          {menu}
         </Menu>
       </aside>
     )
