@@ -3,50 +3,67 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Affix , Row, Col} from 'antd';
 
+import NavPath from '../../components/NavPath/NavPath'
+import Header from '../../components/Header/Header'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import Footer from '../../components/Footer/Footer'
 import {fetchProfile, logout} from '../../actions/auth';
 
+import {cookies} from '../../utils';
+
 import 'antd/style/index.less';
+import './App.less';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentWillMount() {
-        const {actions} = this.props;
-        actions.fetchProfile();
-    }
+  componentWillMount() {
+    const {actions} = this.props;
+    actions.fetchProfile();
+  }
 
-    render() {
-        const {user, actions} = this.props;
+  render() {
+    const {auth, actions} = this.props;
 
-        return (
-            <div>
+    return (
+      <div className="ant-layout-aside">
+        <Sidebar />
+        <div className="ant-layout-main">
+          <Header />
+          <NavPath />
+          <div className="ant-layout-container">
+            <div className="ant-layout-content">
               {this.props.children}
             </div>
-        );
-    }
+          </div>
+          <Footer />
+        </div>
+      </div>
+    );
+  }
 }
 
 App.propTypes = {
-    user: PropTypes.object,
-    children: PropTypes.node.isRequired,
+  auth: PropTypes.object,
+  children: PropTypes.node.isRequired,
 };
 
 App.contextTypes = {
-    history: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) => {
-    const {auth} = state;
-    return {
-        user: auth ? auth.user : null,
-    };
+  const {auth} = state;
+  return {
+      auth: auth ? auth : null,
+  };
 };
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators({fetchProfile, logout}, dispatch)};
+  return {actions: bindActionCreators({fetchProfile, logout}, dispatch)};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

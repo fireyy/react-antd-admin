@@ -7,14 +7,9 @@ import {
 
 const initialState = {
     user: null,
-    registering: false,
     loggingIn: false,
     loggingOut: false,
-    editingProfile: false,
-    showSaveSuccessMessage: false,
-    registersErrors: null,
-    loginErrors: null,
-    editingProfileErrors: null,
+    loginErrors: null
 };
 
 export default function auth(state = initialState, action = {}) {

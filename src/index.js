@@ -10,11 +10,13 @@ import App from './views/App/App';
 import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 
+import {cookies} from './utils';
+
 const history = useRouterHistory(createHistory)({ basename: '' })
 const store = configureStore();
 
 const validate = function (next, replace, callback) {
-  const isLoggedIn = !!store.getState().auth.loggingIn
+  const isLoggedIn = !!cookies.get('uid')
   if (!isLoggedIn && next.location.pathname != '/login') {
     replace('/login')
   }
@@ -24,8 +26,10 @@ const validate = function (next, replace, callback) {
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-        <Route path="/" component={App} onEnter={validate}>
-          <IndexRoute component={Home}/>
+        <Route path="/" onEnter={validate}>
+          <Route component={App}>
+            <Route path="/home" component={Home}/>
+          </Route>
           <Route path="/login" component={Login}/>
         </Route>
       </Router>

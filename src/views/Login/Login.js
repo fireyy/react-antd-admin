@@ -1,5 +1,5 @@
-import React from 'react'
-import { Form, Input, Button, Row, Col, Alert } from 'antd'
+import React, { PropTypes } from 'react'
+import { Form, Input, Button, Row, Col, notification } from 'antd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth'
@@ -8,40 +8,72 @@ const FormItem = Form.Item
 
 import './Login.less'
 
-@connect(
-  state => ({...state}),
-  dispatch => bindActionCreators({login}, dispatch)
-)
+const propTypes = {
+  user: PropTypes.string,
+  loggingIn: PropTypes.bool,
+  loginErrors: PropTypes.string
+};
+
+const contextTypes = {
+  router: PropTypes.object.isRequired,
+  store: PropTypes.object.isRequired
+};
+
 class Login extends React.Component {
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+      const error = nextProps.loginErrors;
+      const isLoggingIn = nextProps.loggingIn;
+      const user = nextProps.user
+
+      if (error != this.props.loginErrors && error) {
+          notification.error({
+              message: 'Login Fail',
+              description: error
+          });
+      }
+
+      if (!isLoggingIn && !error && user)  {
+          notification.success({
+              message: 'Login Success',
+              description: 'Welcome ' + user
+          });
+      }
+
+      if (user) {
+          this.context.router.replace('/home');
+      }
   }
 
   handleSubmit (e) {
     e.preventDefault()
-    this.props.login()
+    const data = this.props.form.getFieldsValue()
+    this.props.login(data.user, data.password)
   }
 
   render () {
+    const { getFieldProps } = this.props.form
     return (
       <Row className="login-row" type="flex" justify="space-around" align="middle">
         <Col span="8">
-          <Alert message="使用 admin/123456 进入" type="info" showIcon />
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} className="login-form">
             <FormItem
               label='用户名：'
               labelCol={{ span: 6 }}
               wrapperCol={{ span: 14 }}
             >
-              <Input placeholder='请输入账户名' name='userName' />
+              <Input placeholder='admin' {...getFieldProps('user')} />
             </FormItem>
             <FormItem
               label='密码：'
               labelCol={{ span: 6 }}
               wrapperCol={{ span: 14 }}
             >
-              <Input type='password' name='password' placeholder='请输入密码' />
+              <Input type='password' placeholder='123456' {...getFieldProps('password')} />
             </FormItem>
             <Row>
               <Col span='16' offset='6'>
@@ -56,4 +88,25 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+Login.contextTypes = contextTypes;
+
+Login.propTypes = propTypes;
+
+Login = Form.create()(Login);
+
+function mapStateToProps(state) {
+  const {auth} = state;
+  if (auth) {
+      return {user: auth.user, loggingIn: auth.loggingIn, loginErrors: ''};
+  }
+
+  return {user: null};
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    login: bindActionCreators(login, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -2,8 +2,9 @@ import {createStore, applyMiddleware, combineReducers} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import auth from '../reducers/auth';
+import menu from '../reducers/menu';
 
-const reducer = combineReducers({auth});
+const reducer = combineReducers({auth, menu});
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware

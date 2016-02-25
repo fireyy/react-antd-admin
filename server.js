@@ -57,14 +57,14 @@ app.get('*', function (req, res){
 app.put('/api/login', function(req, res) {
       const credentials = req.body;
       if(credentials.user==='admin' && credentials.password==='123456'){
-        res.json({'user': credentials.user, 'role': 'ADMIN'});
+        res.json({'user': credentials.user, 'role': 'ADMIN', 'uid': 1});
       }else{
         res.status('500').send({'message' : 'Invalid user/password'});
       }
 });
 
 app.post('/api/my', function(req, res) {
-    res.json({'user': 'admin', 'role': 'ADMIN'});
+    res.json({'user': 'admin', 'role': 'ADMIN', 'uid': 1});
 });
 
 app.post('/api/logout', function(req, res) {
