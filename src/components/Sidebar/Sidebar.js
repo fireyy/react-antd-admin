@@ -43,7 +43,6 @@ class Sidebar extends React.Component {
         </SubMenu>
       )
     });
-    console.log(openKey)
     return (
       <aside className="ant-layout-sider">
         <div className="ant-layout-logo"></div>

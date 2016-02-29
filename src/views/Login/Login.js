@@ -96,11 +96,11 @@ Login = Form.create()(Login);
 
 function mapStateToProps(state) {
   const {auth} = state;
-  if (auth) {
+  if (auth.user) {
       return {user: auth.user, loggingIn: auth.loggingIn, loginErrors: ''};
   }
 
-  return {user: null};
+  return {user: null, loggingIn: auth.loggingIn, loginErrors: auth.loginErrors};
 }
 
 function mapDispatchToProps(dispatch) {
