@@ -55,20 +55,95 @@ app.get('*', function (req, res){
 })
 
 app.put('/api/login', function(req, res) {
-      const credentials = req.body;
-      if(credentials.user==='admin' && credentials.password==='123456'){
-        res.json({'user': credentials.user, 'role': 'ADMIN', 'uid': 1});
-      }else{
-        res.status('500').send({'message' : 'Invalid user/password'});
+  const credentials = req.body;
+  if(credentials.user==='admin' && credentials.password==='123456'){
+    res.cookie('uid', '1', {domain:'127.0.0.1'});
+    res.json({'user': credentials.user, 'role': 'ADMIN', 'uid': 1});
+  }else{
+    res.status('500').send({'message' : 'Invalid user/password'});
+  }
+});
+
+app.post('/api/menu', function(req, res) {
+  res.json({
+    menus: [
+      {
+        name: '导航一',
+        icon: 'user',
+        child: [
+          {
+            name: '选项1',
+            key: ''
+          },
+          {
+            name: '选项2',
+            key: ''
+          },
+          {
+            name: '选项3',
+            key: ''
+          },
+          {
+            name: '选项4',
+            key: ''
+          }
+        ]
+      },
+      {
+        name: '导航二',
+        icon: 'laptop',
+        child: [
+          {
+            name: '选项5',
+            key: ''
+          },
+          {
+            name: '选项2',
+            key: ''
+          },
+          {
+            name: '选项3',
+            key: ''
+          },
+          {
+            name: '选项4',
+            key: ''
+          }
+        ]
+      },
+      {
+        name: '导航三',
+        icon: 'notification',
+        child: [
+          {
+            name: '选项1',
+            key: ''
+          },
+          {
+            name: '选项2',
+            key: ''
+          },
+          {
+            name: '选项3',
+            key: ''
+          },
+          {
+            name: '选项4',
+            key: ''
+          }
+        ]
       }
+    ]
+  });
 });
 
 app.post('/api/my', function(req, res) {
-    res.json({'user': 'admin', 'role': 'ADMIN', 'uid': 1});
+  res.json({'user': 'admin', 'role': 'ADMIN', 'uid': 1});
 });
 
 app.post('/api/logout', function(req, res) {
-    res.json({'user': 'admin', 'role': 'ADMIN'});
+  res.clearCookie('uid');
+  res.json({'user': 'admin', 'role': 'ADMIN'});
 });
 
 // We need to use basic HTTP service to proxy

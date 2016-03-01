@@ -10,13 +10,13 @@ import App from './views/App/App';
 import Home from './views/Home/Home';
 import Login from './views/Login/Login';
 
-import {cookies} from './utils';
+import {getCookie} from './utils';
 
 const history = useRouterHistory(createHistory)({ basename: '' })
 const store = configureStore();
 
 const validate = function (next, replace, callback) {
-  const isLoggedIn = !!cookies.get('uid')
+  const isLoggedIn = !!getCookie('uid')
   if (!isLoggedIn && next.location.pathname != '/login') {
     replace('/login')
   }

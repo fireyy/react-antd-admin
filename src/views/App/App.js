@@ -9,8 +9,6 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import Footer from '../../components/Footer/Footer'
 import {fetchProfile, logout} from '../../actions/auth';
 
-import {cookies} from '../../utils';
-
 import 'antd/style/index.less';
 import './App.less';
 
@@ -31,7 +29,7 @@ class App extends React.Component {
       <div className="ant-layout-aside">
         <Sidebar />
         <div className="ant-layout-main">
-          <Header />
+          <Header user={auth} />
           <NavPath />
           <div className="ant-layout-container">
             <div className="ant-layout-content">

@@ -1,5 +1,6 @@
 import {
-    GET_ALL_MENU
+    GET_ALL_MENU,
+    GET_ALL_MENU_SUCCESS
 } from '../actions/menu';
 
 const initialState = {
@@ -9,8 +10,8 @@ const initialState = {
 
 export default function menu(state = initialState, action = {}) {
     switch (action.type) {
-        case GET_ALL_MENU:
-            return Object.assign({}, initialState, {items: action.data});
+        case GET_ALL_MENU_SUCCESS:
+            return Object.assign({}, initialState, {items: action.payload.menus});
         default:
             return state;
     }

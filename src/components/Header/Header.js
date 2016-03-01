@@ -16,11 +16,12 @@ export default class Header extends React.Component {
   }
 
   render () {
+    const {user} = this.props
     return (
       <div className='ant-layout-header'>
         <Menu className="header-menu" onClick={this.handleClick}
         mode="horizontal">
-          <SubMenu title={<span><Icon type="user" />admin</span>}>
+          <SubMenu title={<span><Icon type="user" />{user.user}</span>}>
             <Menu.Item key="setting:1">选项1</Menu.Item>
             <Menu.Item key="setting:2">选项2</Menu.Item>
             <Menu.Divider />

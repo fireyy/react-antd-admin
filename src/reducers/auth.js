@@ -7,8 +7,6 @@ import {
   FETCH_PROFILE_SUCCESS
 } from '../actions/auth';
 
-import {cookies} from '../utils';
-
 const initialState = {
   user: null,
   loggingIn: false,
@@ -21,9 +19,7 @@ export default function auth(state = initialState, action = {}) {
     case LOGIN_PENDING:
       return Object.assign({}, initialState, {loggingIn: true});
     case LOGIN_SUCCESS:
-      const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
-      cookies.set({name: 'uid', value: uid, expires});
-      return Object.assign({}, state, {user: action.user, loggingIn: false, loginErrors: null});
+      return Object.assign({}, state, {user: action.payload.user, loggingIn: false, loginErrors: null});
     case LOGIN_ERROR:
       return {
         ...state,
@@ -32,7 +28,6 @@ export default function auth(state = initialState, action = {}) {
         loginErrors: action.payload.message
       };
     case LOGOUT_SUCCESS:
-      cookies.unset('uid');
       return {
         ...state,
         loggingOut: false,
@@ -40,7 +35,7 @@ export default function auth(state = initialState, action = {}) {
         loginErrors: null
       };
     case FETCH_PROFILE_SUCCESS:
-      return Object.assign({}, state, {user: action.payload.body.user, loggingIn: false, loginErrors: null});
+      return Object.assign({}, state, {user: action.payload.user, loggingIn: false, loginErrors: null});
     default:
       return state;
   }
