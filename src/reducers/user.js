@@ -5,7 +5,7 @@ import {
   LOGOUT_SUCCESS,
   FETCH_PROFILE_PENDING,
   FETCH_PROFILE_SUCCESS
-} from '../actions/auth';
+} from '../actions/user';
 
 const initialState = {
   user: null,

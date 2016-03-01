@@ -3,10 +3,10 @@ import thunkMiddleware from 'redux-thunk';
 
 import promiseMiddleware from '../middlewares/promiseMiddleware'
 
-import auth from '../reducers/auth';
+import user from '../reducers/user';
 import menu from '../reducers/menu';
 
-const reducer = combineReducers({auth, menu});
+const reducer = combineReducers({user, menu});
 
 const createStoreWithMiddleware = applyMiddleware(
   thunkMiddleware,
