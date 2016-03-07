@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router, Route, IndexRoute,useRouterHistory} from 'react-router';
+import {Router, Route, IndexRedirect, useRouterHistory} from 'react-router';
 import {createHistory} from 'history'
 
 import configureStore from './store/configureStore';
@@ -27,10 +27,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
         <Route path="/" onEnter={validate}>
+          <IndexRedirect to="home" />
           <Route component={App}>
-            <Route path="/home" component={Home}/>
+            <Route path="home" component={Home}/>
           </Route>
-          <Route path="/login" component={Login}/>
+          <Route path="login" component={Login}/>
         </Route>
       </Router>
   </Provider>,
