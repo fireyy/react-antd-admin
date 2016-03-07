@@ -68,68 +68,71 @@ app.post('/api/menu', function(req, res) {
   res.json({
     menus: [
       {
+        key: 1,
         name: '导航一',
         icon: 'user',
         child: [
           {
             name: '选项1',
-            key: ''
+            key: 101
           },
           {
             name: '选项2',
-            key: ''
+            key: 102
           },
           {
             name: '选项3',
-            key: ''
+            key: 103
           },
           {
             name: '选项4',
-            key: ''
+            key: 104
           }
         ]
       },
       {
+        key: 2,
         name: '导航二',
         icon: 'laptop',
         child: [
           {
             name: '选项5',
-            key: ''
+            key: 201
           },
           {
             name: '选项2',
-            key: ''
+            key: 202
           },
           {
             name: '选项3',
-            key: ''
+            key: 203
           },
           {
             name: '选项4',
-            key: ''
+            key: 204
           }
         ]
       },
       {
+        key: 3,
         name: '导航三',
         icon: 'notification',
         child: [
           {
             name: '选项1',
-            key: ''
+            key: 301
           },
           {
             name: '选项2',
-            key: ''
+            key: 302
           },
           {
             name: '选项3',
-            key: ''
+            key: 303
           },
           {
             name: '选项4',
-            key: ''
+            key: 304
           }
         ]
       }
