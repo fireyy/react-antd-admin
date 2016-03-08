@@ -4,7 +4,6 @@ const webpack = require('webpack');
 
 const express = require('express');
 const path = require('path');
-const http = require('http');
 const bodyParser = require('body-parser');
 const config = require('./webpack.config');
 
@@ -13,8 +12,7 @@ const isDeveloping = !isProduction;
 
 const app = express();
 
-
-// Webpack dev server
+// Webpack developer
 if (isDeveloping) {
   const compiler = webpack(config);
   app.use(require('webpack-dev-middleware')(compiler, {
@@ -132,11 +130,7 @@ app.post('/api/logout', function(req, res) {
   res.json({'user': 'admin', 'role': 'ADMIN'});
 });
 
-// We need to use basic HTTP service to proxy
-// websocket requests from webpack
-const server = http.createServer(app);
-
-server.listen(port, function (err, result) {
+app.listen(port, function (err, result) {
   if(err){
     console.log(err);
   }

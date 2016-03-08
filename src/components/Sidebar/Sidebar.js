@@ -49,7 +49,7 @@ class Sidebar extends React.Component {
     });
     return (
       <aside className="ant-layout-sider">
-        <div className="ant-layout-logo"></div>
+        <div className="ant-layout-logo">123</div>
         <Menu mode="inline" theme="dark" openKeys={openKey} onClick={this.menuClickHandle.bind(this)}>
           {menu}
         </Menu>
