@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true',
+    'webpack-hot-middleware/client',
     './src/index'
   ],
   output: {
@@ -13,7 +13,7 @@ module.exports = {
     publicPath: '/dist'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
+    //new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('development')
@@ -26,12 +26,7 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true,
-          plugins: ['transform-runtime', 'transform-decorators-legacy', 'antd'],
-          presets: ['es2015', 'react', 'stage-0']
-        },
+        loaders: ['babel'],
         exclude: /node_modules/,
         include: __dirname
       },

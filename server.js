@@ -1,8 +1,6 @@
 require('babel-register')
 
 const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const express = require('express');
 const path = require('path');
@@ -18,28 +16,13 @@ const app = express();
 
 // Webpack dev server
 if (isDeveloping) {
-  const WEBPACK_PORT = 3001;
   const compiler = webpack(config);
-  app.use(webpackMiddleware(compiler, {
+  app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
-    stats: {
-      colors: true,
-      hash: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
+    noInfo: true
   }));
 
-  app.use(webpackHotMiddleware(compiler));
-  app.listen(WEBPACK_PORT, 'localhost', function (err, result) {
-    if (err) {
-      console.log(err);
-    }
-
-    console.log('WebpackDevServer listening at localhost:'+WEBPACK_PORT);
-  });
+  app.use(require('webpack-hot-middleware')(compiler));
 }
 
 //  RESTful API
@@ -69,7 +52,7 @@ app.post('/api/menu', function(req, res) {
     menus: [
       {
         key: 1,
-        name: '导航一',
+        name: 'Dashboard',
         icon: 'user',
         child: [
           {
