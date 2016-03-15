@@ -6,9 +6,9 @@ import {createHistory} from 'history'
 
 import configureStore from './store/configureStore';
 
-import App from './views/App/App';
-import Home from './views/Home/Home';
-import Login from './views/Login/Login';
+import App from './views/App';
+import Home from './views/Home';
+import Login from './views/Login';
 
 import {getCookie} from './utils';
 

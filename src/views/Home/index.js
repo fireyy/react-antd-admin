@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col, Collapse, Alert } from 'antd';
 const Panel = Collapse.Panel;
 
-import './Home.less'
+import './index.less'
 
 const text = `
   A dog is a type of domesticated animal.

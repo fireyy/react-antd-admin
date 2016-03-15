@@ -6,7 +6,7 @@ import { login } from '../../actions/user'
 
 const FormItem = Form.Item
 
-import './Login.less'
+import './index.less'
 
 const propTypes = {
   user: PropTypes.string,

@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { Breadcrumb } from 'antd'
 import { connect } from 'react-redux'
 
-import './NavPath.less'
+import './index.less'
 
 const defaultProps = {
   navpath: []

@@ -3,14 +3,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Affix , Row, Col} from 'antd';
 
-import NavPath from '../../components/NavPath/NavPath'
-import Header from '../../components/Header/Header'
-import Sidebar from '../../components/Sidebar/Sidebar'
-import Footer from '../../components/Footer/Footer'
+import NavPath from '../../components/NavPath'
+import Header from '../../components/Header'
+import Sidebar from '../../components/Sidebar'
+import Footer from '../../components/Footer'
 import {fetchProfile, logout} from '../../actions/user';
 
 import 'antd/style/index.less';
-import './App.less';
+import './index.less';
 
 class App extends React.Component {
   constructor(props) {

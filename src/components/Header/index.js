@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col, Icon, Menu, Dropdown } from 'antd'
-import './Header.less'
+import './index.less'
 import { Link } from 'react-router'
 
 const SubMenu = Menu.SubMenu;
