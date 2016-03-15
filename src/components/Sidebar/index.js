@@ -22,6 +22,8 @@ const propTypes = {
 class Sidebar extends React.Component {
   constructor (props) {
     super(props)
+
+    this.menuClickHandle = this.menuClickHandle.bind(this);
   }
 
   componentDidMount () {
@@ -50,7 +52,7 @@ class Sidebar extends React.Component {
     return (
       <aside className="ant-layout-sider">
         <div className="ant-layout-logo"></div>
-        <Menu mode="inline" theme="dark" openKeys={openKey} onClick={this.menuClickHandle.bind(this)}>
+        <Menu mode="inline" theme="dark" openKeys={openKey} onClick={this.menuClickHandle}>
           {menu}
         </Menu>
       </aside>
