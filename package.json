@@ -12,10 +12,12 @@
   "dependencies": {
     "antd": "^0.12.4",
     "body-parser": "^1.15.0",
+    "chart.js": "^1.0.2",
     "express": "^4.13.4",
     "history": "^2.0.0",
     "lodash": "^4.6.1",
     "react": "^0.14.7",
+    "react-chartjs": "^0.7.3",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",

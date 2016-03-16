@@ -40,7 +40,10 @@ class Sidebar extends React.Component {
     const menu = items.map((item) => {
       openKey.push('sub'+item.key)
       return (
-        <SubMenu key={'sub'+item.key} title={<span><Icon type={item.icon} />{item.name}</span>}>
+        <SubMenu
+          key={'sub'+item.key}
+          title={<span><Icon type={item.icon} />{item.name}</span>}
+        >
           {item.child.map((node) => {
             return (
               <Menu.Item key={'menu'+node.key}>{node.name}</Menu.Item>
@@ -52,7 +55,10 @@ class Sidebar extends React.Component {
     return (
       <aside className="ant-layout-sider">
         <div className="ant-layout-logo"></div>
-        <Menu mode="inline" theme="dark" openKeys={openKey} onClick={this.menuClickHandle}>
+        <Menu
+          mode="inline" theme="dark" openKeys={openKey}
+          onClick={this.menuClickHandle}
+        >
           {menu}
         </Menu>
       </aside>
