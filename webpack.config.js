@@ -31,6 +31,13 @@ module.exports = {
         include: __dirname
       },
       {
+        test: /\.css?$/,
+        loaders : [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
         test: /\.less?$/,
         loaders : [
           'style-loader',

@@ -56,7 +56,7 @@ class Login extends React.Component {
   }
 
   render () {
-    const { getFieldProps } = this.props.form
+    const { getFieldDecorator } = this.props.form
     return (
       <Row className="login-row" type="flex" justify="space-around" align="middle">
         <Col span="8">
@@ -66,14 +66,18 @@ class Login extends React.Component {
               labelCol={{ span: 6 }}
               wrapperCol={{ span: 14 }}
             >
-              <Input placeholder='admin' {...getFieldProps('user')} />
+              {getFieldDecorator('user')(
+                <Input placeholder='admin' />
+              )}
             </FormItem>
             <FormItem
               label='密码：'
               labelCol={{ span: 6 }}
               wrapperCol={{ span: 14 }}
             >
-              <Input type='password' placeholder='123456' {...getFieldProps('password')} />
+              {getFieldDecorator('password')(
+                <Input type='password' placeholder='123456' />
+              )}
             </FormItem>
             <Row>
               <Col span='16' offset='6'>

@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Router, Route, IndexRedirect, useRouterHistory} from 'react-router';
-import {createHistory} from 'history'
+import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
 
 import configureStore from './store/configureStore';
 
@@ -12,7 +11,6 @@ import Login from './views/Login';
 
 import {getCookie} from './utils';
 
-const history = useRouterHistory(createHistory)({ basename: '' })
 const store = configureStore();
 
 const validate = function (next, replace, callback) {
@@ -25,7 +23,7 @@ const validate = function (next, replace, callback) {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
+    <Router history={hashHistory}>
         <Route path="/" onEnter={validate}>
           <IndexRedirect to="home" />
           <Route component={App}>
