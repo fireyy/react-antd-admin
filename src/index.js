@@ -8,6 +8,7 @@ import configureStore from './store/configureStore';
 import App from './views/App';
 import Home from './views/Home';
 import Login from './views/Login';
+import Page2 from './views/Page2';
 
 import {getCookie} from './utils';
 
@@ -28,6 +29,7 @@ ReactDOM.render(
           <IndexRedirect to="home" />
           <Route component={App}>
             <Route path="home" component={Home}/>
+            <Route path="page2" component={Page2}/>
           </Route>
           <Route path="login" component={Login}/>
         </Route>

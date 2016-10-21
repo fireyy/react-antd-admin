@@ -44,12 +44,7 @@ class App extends React.Component {
 
 App.propTypes = {
   user: PropTypes.object,
-  children: PropTypes.node.isRequired,
-};
-
-App.contextTypes = {
-  history: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
+  children: PropTypes.node.isRequired
 };
 
 const mapStateToProps = (state) => {

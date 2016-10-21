@@ -7,7 +7,6 @@ import {
 } from '../actions/menu';
 
 const initialState = {
-  currentIndex: 0,
   items: [],
   navpath: []
 };

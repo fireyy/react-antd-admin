@@ -55,11 +55,13 @@ app.post('/api/menu', function(req, res) {
         child: [
           {
             name: '选项1',
-            key: 101
+            key: 101,
+            url: '/home'
           },
           {
             name: '选项2',
-            key: 102
+            key: 102,
+            url: '/page2'
           },
           {
             name: '选项3',
