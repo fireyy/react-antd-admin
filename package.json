@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
+    "build": "webpack --config webpack.prod.config.js",
+    "demo": "NODE_ENV=production PORT=5500 node server",
     "start": "node server"
   },
   "author": "fireyy",
@@ -42,6 +44,7 @@
     "css-loader": "^0.25.0",
     "enzyme": "^2.5.1",
     "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.24.1",
     "jsdom": "^9.8.0",
     "less": "^2.7.1",
     "less-loader": "^2.2.3",

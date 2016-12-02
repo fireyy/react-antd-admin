@@ -1,22 +1,22 @@
 var path = require('path');
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+var distPath = path.join(__dirname, 'dist');
 
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './src/index'
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: distPath,
     filename: 'bundle.js',
-    publicPath: '/dist'
+    publicPath: '/'
   },
   plugins: [
-    //new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify('development')
+    new HtmlWebpackPlugin({
+      template: __dirname + '/index.tpl'
     })
   ],
   resolve: {

@@ -10,5 +10,4 @@
         <div id="root">
         </div>
     </body>
-    <script src="/dist/bundle.js"></script>
 </html>

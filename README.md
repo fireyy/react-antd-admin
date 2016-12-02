@@ -27,6 +27,18 @@ $ npm start
 $ npm run test
 ```
 
+## Build
+
+```shell
+$ npm run build
+```
+
+## Run demo
+
+```shell
+$ npm run demo
+```
+
 ## Changelog
 
 ### 0.1.2
