@@ -1,39 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {Router, Route, IndexRedirect, hashHistory} from 'react-router';
+import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
 import configureStore from './store/configureStore';
 
-import App from './views/App';
-import Home from './views/Home';
-import Login from './views/Login';
-import Page2 from './views/Page2';
-
-import {getCookie} from './utils';
+import Root from './containers/Root';
 
 const store = configureStore();
 
-const validate = function (next, replace, callback) {
-  const isLoggedIn = !!getCookie('uid')
-  if (!isLoggedIn && next.location.pathname != '/login') {
-    replace('/login')
-  }
-  callback()
-}
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hashHistory}>
-        <Route path="/" onEnter={validate}>
-          <IndexRedirect to="home" />
-          <Route component={App}>
-            <Route path="home" component={Home}/>
-            <Route path="page2" component={Page2}/>
-          </Route>
-          <Route path="login" component={Login}/>
-        </Route>
-      </Router>
-  </Provider>,
+render(
+  <AppContainer>
+    <Root
+      store={ store }
+    />
+  </AppContainer>,
   document.getElementById('root')
 );
+
+if (module.hot) {
+  module.hot.accept('./containers/Root', () => {
+    const RootContainer = require('./containers/Root');
+    render(
+      <AppContainer>
+        <RootContainer
+          store={ store }
+        />
+      </AppContainer>,
+      document.getElementById('root')
+    );
+  });
+}

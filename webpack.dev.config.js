@@ -3,7 +3,7 @@ var webpack = require('webpack');
 var base = require('./webpack.config');
 
 base.devtool = 'eval-source-map';
-base.entry.unshift('webpack-hot-middleware/client');
+base.entry.unshift('react-hot-loader/patch', 'webpack-hot-middleware/client');
 base.plugins.push(
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoErrorsPlugin(),

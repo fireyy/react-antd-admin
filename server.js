@@ -17,7 +17,13 @@ if (isDeveloping) {
   var compiler = webpack(config);
   devMiddleWare = require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath,
-    noInfo: true
+    stats: {
+      colors: true,
+      modules: false,
+      children: false,
+      chunks: false,
+      chunkModules: false
+    }
   })
   app.use(devMiddleWare);
 
