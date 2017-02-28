@@ -6,8 +6,8 @@
   "scripts": {
     "test": "mocha tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
     "build": "webpack --config webpack.prod.config.js",
-    "demo": "NODE_ENV=production PORT=5500 node server",
-    "start": "node server"
+    "dev": "node devServer",
+    "start": "NODE_ENV=production PORT=80 node ."
   },
   "repository": {
     "type": "git",
