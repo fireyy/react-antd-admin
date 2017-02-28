@@ -1,5 +1,13 @@
 ## React Ant.Design Admin UI
 
+<p align="center">
+  <a href="https://react-antd-admin-tdvuydxaou.now.sh" target="_blank">
+    <img src="demo.png" width="700px">
+    <br>
+    Live Demo
+  </a>
+</p>
+
 ## Features
 
 - [React](https://facebook.github.io/react/)
@@ -18,7 +26,7 @@ Just clone the repo and install the necessary node modules:
 $ git clone https://github.com/fireyy/react-antd-admin
 $ cd react-antd-admin
 $ npm install
-$ npm start
+$ npm run dev
 ```
 
 ## Run test spec
@@ -33,10 +41,10 @@ $ npm run test
 $ npm run build
 ```
 
-## Run demo
+## Run Production
 
 ```shell
-$ npm run demo
+$ npm run start
 ```
 
 ## Changelog
