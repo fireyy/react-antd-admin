@@ -22,13 +22,20 @@ const contextTypes = {
 class Login extends React.Component {
 
   constructor (props) {
-    super(props)
+    super(props);
+    this.state = {
+      loading: false
+    }
   }
 
   componentWillReceiveProps(nextProps) {
       const error = nextProps.loginErrors;
       const isLoggingIn = nextProps.loggingIn;
       const user = nextProps.user
+
+      this.setState({
+        loading: false
+      });
 
       if (error != this.props.loginErrors && error) {
           notification.error({
@@ -50,7 +57,10 @@ class Login extends React.Component {
   }
 
   handleSubmit (e) {
-    e.preventDefault()
+    e.preventDefault();
+    this.setState({
+      loading: true
+    });
     const data = this.props.form.getFieldsValue()
     this.props.login(data.user, data.password)
   }
@@ -81,7 +91,7 @@ class Login extends React.Component {
             </FormItem>
             <Row>
               <Col span='16' offset='6'>
-                <Button type='primary' htmlType='submit'>确定</Button>
+                <Button type='primary' icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
               </Col>
             </Row>
           </Form>
