@@ -69,8 +69,9 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form
     return (
       <Row className="login-row" type="flex" justify="space-around" align="middle">
-        <Col span="8">
+        <Col span="8"> 
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} className="login-form">
+            <h2 className="logo"><span>logo</span></h2>
             <FormItem
               label='用户名：'
               labelCol={{ span: 6 }}
@@ -90,8 +91,8 @@ class Login extends React.Component {
               )}
             </FormItem>
             <Row>
-              <Col span='16' offset='6'>
-                <Button type='primary' icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
+              <Col span='14' offset='6'>
+                <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
               </Col>
             </Row>
           </Form>
