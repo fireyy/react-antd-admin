@@ -4,60 +4,23 @@ const Panel = Collapse.Panel;
 
 import PanelBox from '../../components/PanelBox';
 
-import {Line,Pie,Doughnut} from 'react-chartjs';
+import createG2 from 'g2-react';
+import { Stat } from 'g2';
+import data from '../../../fake/chart1.js';
+import data2 from '../../../fake/chart2.js';
 
 import './index.less'
 
-const chartOption = {
-  responsive: true
-}
+const Pie = createG2(chart => {
+  chart.coord('theta');
+  chart.intervalStack().position(Stat.summary.proportion()).color('cut');
+  chart.render();
+});
 
-const lineData = {
-  labels: ["January", "February", "March", "April", "May", "June", "July"],
-  datasets: [
-      {
-          label: "My First dataset",
-          fillColor: "rgba(220,220,220,0.2)",
-          strokeColor: "rgba(220,220,220,1)",
-          pointColor: "rgba(220,220,220,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(220,220,220,1)",
-          data: [65, 59, 80, 81, 56, 55, 40]
-      },
-      {
-          label: "My Second dataset",
-          fillColor: "rgba(151,187,205,0.2)",
-          strokeColor: "rgba(151,187,205,1)",
-          pointColor: "rgba(151,187,205,1)",
-          pointStrokeColor: "#fff",
-          pointHighlightFill: "#fff",
-          pointHighlightStroke: "rgba(151,187,205,1)",
-          data: [28, 48, 40, 19, 86, 27, 90]
-      }
-  ]
-};
-
-const pieData = [
-    {
-        value: 300,
-        color:"#F7464A",
-        highlight: "#FF5A5E",
-        label: "Red"
-    },
-    {
-        value: 50,
-        color: "#46BFBD",
-        highlight: "#5AD3D1",
-        label: "Green"
-    },
-    {
-        value: 100,
-        color: "#FDB45C",
-        highlight: "#FFC870",
-        label: "Yellow"
-    }
-];
+const Line = createG2(chart => {
+  chart.line().position('time*price').color('name').shape('spline').size(2);
+  chart.render();
+});
 
 const text = `
   A dog is a type of domesticated animal.
@@ -74,6 +37,16 @@ const text = `
 export default class Home extends React.Component {
   constructor () {
     super()
+    this.state = {
+      data0: data2.slice(0, data.length / 2 - 1),
+      data1: data.slice(0, data.length / 2 - 1),
+      data2: data.slice(data.length / 2 - 1, data.length),
+      width: 500,
+      height: 250,
+      plotCfg: {
+        margin: [10, 10, 50, 10]
+      },
+    }
   }
 
   componentWillMount () {
@@ -106,16 +79,30 @@ export default class Home extends React.Component {
           showIcon
         />
         <PanelBox title="最近的数据">
-          <Line data={lineData} options={chartOption} />
+          <Line
+            data={this.state.data0}
+            width={1000}
+            height={200}
+          />
         </PanelBox>
         <PanelBox title="最近的数据">
           <Row className="home-row" type="flex" justify="space-between">
             <Col span="12">
-              <Pie data={pieData} options={chartOption} />
+              <Pie
+                data={this.state.data1}
+                width={this.state.width}
+                height={this.state.height}
+                ref="myChart"
+              />
               <h3 className="home-title-x">测试数据1</h3>
             </Col>
             <Col span="12">
-              <Doughnut data={pieData} options={chartOption} />
+              <Pie
+                data={this.state.data2}
+                width={this.state.width}
+                height={this.state.height}
+                ref="myChart"
+              />
               <h3 className="home-title-x">测试数据2</h3>
             </Col>
           </Row>
