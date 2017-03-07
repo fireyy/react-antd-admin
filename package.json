@@ -6,8 +6,7 @@
   "scripts": {
     "test": "mocha tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
     "build": "webpack --config webpack.prod.config.js",
-    "dev": "node devServer",
-    "start": "NODE_ENV=production PORT=80 node ."
+    "dev": "node devServer"
   },
   "repository": {
     "type": "git",
@@ -17,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "antd": "^2.0.0",
+    "axios": "^0.15.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "g2": "^2.2.4",
@@ -28,10 +28,10 @@
     "react-redux": "^4.4.0",
     "react-router": "^2.0.0",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0",
-    "superagent": "^2.3.0"
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
+    "axios-mock-adapter": "^1.7.1",
     "babel-core": "^6.17.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",

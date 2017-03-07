@@ -1,33 +1,4 @@
-var express = require('express');
-var path = require('path');
-var bodyParser = require('body-parser');
-
-var app = express();
-
-app.get('/', function(req, res) {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'))
-})
-
-// static
-app.use(express.static(publicPath));
-
-//  RESTful API
-app.use(bodyParser.json({ type: 'application/json' }))
-
-var port = process.env.PORT || 80;
-
-app.put('/api/login', function(req, res) {
-  var credentials = req.body;
-  if(credentials.user==='admin' && credentials.password==='123456'){
-    res.cookie('uid', '1', {domain:'127.0.0.1'});
-    res.json({'user': credentials.user, 'role': 'ADMIN', 'uid': 1});
-  }else{
-    res.status('500').send({'message' : 'Invalid user/password'});
-  }
-});
-
-app.post('/api/menu', function(req, res) {
-  res.json({
+module.exports = {
     menus: [
       {
         key: 1,
@@ -101,21 +72,4 @@ app.post('/api/menu', function(req, res) {
         ]
       }
     ]
-  });
-});
-
-app.post('/api/my', function(req, res) {
-  res.json({'user': 'admin', 'role': 'ADMIN', 'uid': 1});
-});
-
-app.post('/api/logout', function(req, res) {
-  res.clearCookie('uid');
-  res.json({'user': 'admin', 'role': 'ADMIN'});
-});
-
-app.listen(port, function (err, result) {
-  if(err){
-    console.log(err);
   }
-  console.log('Server running on http://localhost:' + port);
-});

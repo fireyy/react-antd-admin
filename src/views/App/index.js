@@ -7,7 +7,7 @@ import NavPath from '../../components/NavPath'
 import Header from '../../components/Header'
 import Sidebar from '../../components/Sidebar'
 import Footer from '../../components/Footer'
-import {fetchProfile, logout} from '../../actions/user';
+import {fetchProfile, logout} from '../../actions/auth';
 
 import './index.less';
 
@@ -22,13 +22,13 @@ class App extends React.Component {
   }
 
   render() {
-    const {user, actions} = this.props;
+    const {auth, actions} = this.props;
 
     return (
       <div className="ant-layout-aside">
         <Sidebar />
         <div className="ant-layout-main">
-          <Header user={user} />
+          <Header profile={auth} logout={actions.logout} />
           <NavPath />
           <div className="ant-layout-container">
             <div className="ant-layout-content">
@@ -48,9 +48,9 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  const {user} = state;
+  const {auth} = state;
   return {
-      user: user ? user : null,
+      auth: auth ? auth : null,
   };
 };
 

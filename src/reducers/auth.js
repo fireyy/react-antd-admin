@@ -5,7 +5,7 @@ import {
   LOGOUT_SUCCESS,
   FETCH_PROFILE_PENDING,
   FETCH_PROFILE_SUCCESS
-} from '../actions/user';
+} from '../actions/auth';
 
 const initialState = {
   user: null,
@@ -19,7 +19,9 @@ export default function auth(state = initialState, action = {}) {
     case LOGIN_PENDING:
       return Object.assign({}, initialState, {loggingIn: true});
     case LOGIN_SUCCESS:
-      return Object.assign({}, state, {user: action.payload.user, loggingIn: false, loginErrors: null});
+      let user = action.payload.data;
+      window.localStorage.setItem('uid', user.uid);
+      return Object.assign({}, state, {user: user, loggingIn: false, loginErrors: null});
     case LOGIN_ERROR:
       return {
         ...state,
@@ -28,6 +30,7 @@ export default function auth(state = initialState, action = {}) {
         loginErrors: action.payload.message
       };
     case LOGOUT_SUCCESS:
+      window.localStorage.removeItem('uid');
       return {
         ...state,
         loggingOut: false,
@@ -35,7 +38,7 @@ export default function auth(state = initialState, action = {}) {
         loginErrors: null
       };
     case FETCH_PROFILE_SUCCESS:
-      return Object.assign({}, state, {user: action.payload.user, loggingIn: false, loginErrors: null});
+      return Object.assign({}, state, {user: action.payload.data, loggingIn: false, loginErrors: null});
     default:
       return state;
   }

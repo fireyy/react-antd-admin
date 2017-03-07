@@ -1,11 +1,12 @@
-import Api from './api';
+var axios = require('axios');
+var MockAdapter = require('axios-mock-adapter');
 
-const api = new Api({
-  baseURI: '/api',
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
+// mock 数据
+var mock = new MockAdapter(axios);
 
-export default api
+mock.onPut('/login').reply(200, require('./mock/user'));
+mock.onGet('/logout').reply(200, {});
+mock.onGet('/my').reply(200, require('./mock/user'));
+mock.onGet('/menu').reply(200, require('./mock/menu'));
+
+module.exports = axios;

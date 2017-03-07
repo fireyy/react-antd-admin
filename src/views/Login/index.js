@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react'
 import { Form, Input, Button, Row, Col, notification } from 'antd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { login } from '../../actions/user'
+import { login } from '../../actions/auth'
 
 const FormItem = Form.Item
 
 import './index.less'
 
 const propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.object,
   loggingIn: PropTypes.bool,
   loginErrors: PropTypes.string
 };
@@ -110,12 +110,12 @@ Login.propTypes = propTypes;
 Login = Form.create()(Login);
 
 function mapStateToProps(state) {
-  const {user} = state;
-  if (user.user) {
-      return {user: user.user, loggingIn: user.loggingIn, loginErrors: ''};
+  const {auth} = state;
+  if (auth.user) {
+      return {user: auth.user, loggingIn: auth.loggingIn, loginErrors: ''};
   }
 
-  return {user: null, loggingIn: user.loggingIn, loginErrors: user.loginErrors};
+  return {user: null, loggingIn: auth.loggingIn, loginErrors: auth.loginErrors};
 }
 
 function mapDispatchToProps(dispatch) {

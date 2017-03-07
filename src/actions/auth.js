@@ -1,7 +1,5 @@
 import api from '../api'
 
-import {getCookie} from '../utils';
-
 export const FETCH_PROFILE_PENDING = 'FETCH_PROFILE_PENDING';
 export const FETCH_PROFILE_SUCCESS = 'FETCH_PROFILE_SUCCESS';
 
@@ -12,7 +10,7 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 
 export function fetchProfile() {
-    let uid = getCookie('uid');
+    let uid = window.localStorage.getItem('uid');
 
     if (uid === undefined) {
         return {type: 'UID_NOT_FOUND'};
@@ -21,7 +19,7 @@ export function fetchProfile() {
     return {
         type: 'FETCH_PROFILE',
         payload: {
-          promise: api.post('/my')
+          promise: api.get('/my')
         }
     }
 }
@@ -43,6 +41,9 @@ export function login(user, password) {
 export function logout() {
 
     return {
-        type: 'LOGOUT'
+        type: 'LOGOUT',
+        payload: {
+          promise: api.get('/logout')
+        }
     }
 }

@@ -7,10 +7,8 @@ import Home from '../views/Home';
 import Login from '../views/Login';
 import Page2 from '../views/Page2';
 
-import {getCookie} from '../utils';
-
 const validate = function (next, replace, callback) {
-  const isLoggedIn = !!getCookie('uid')
+  const isLoggedIn = !!window.localStorage.getItem('uid')
   if (!isLoggedIn && next.location.pathname != '/login') {
     replace('/login')
   }

@@ -18,7 +18,7 @@ export function getAllMenu() {
   return {
     type: GET_ALL_MENU,
     payload: {
-      promise: api.post('/menu')
+      promise: api.get('/menu')
     }
   }
 }
