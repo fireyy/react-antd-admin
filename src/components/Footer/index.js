@@ -1,8 +1,12 @@
 import React from 'react'
 
+import { Layout } from 'antd'
+
 import './index.less'
 
-export default class Footer extends React.Component {
+const { Footer } = Layout;
+
+export default class commonFooter extends React.Component {
   constructor () {
     super()
   }
@@ -10,9 +14,9 @@ export default class Footer extends React.Component {
   render () {
 
     return (
-      <div className="ant-layout-footer">
-      xxxx 版权所有 © 2015 xxxxxx.com
-      </div>
+      <Footer style={{ textAlign: 'center' }}>
+        xxxx 版权所有 © 2015 xxxxxx.com
+      </Footer>
     )
   }
 }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Menu, Icon } from 'antd'
+import { Layout, Menu, Icon } from 'antd'
 import { Link } from 'react-router'
 import { getAllMenu, updateNavPath } from '../../actions/menu'
 
@@ -17,21 +17,29 @@ const propTypes = {
   items: PropTypes.array
 }
 
-class Sidebar extends React.Component {
-  constructor (props) {
-    super(props)
+const { Sider } = Layout;
 
-    this.state = {
-      activeKey: ""
-    }
-    this.menuClickHandle = this.menuClickHandle.bind(this);
+class Sidebar extends React.Component {
+
+  state = {
+    activeKey: "",
+    collapsed: false,
+    mode: 'inline',
+  }
+
+  onCollapse = (collapsed) => {
+    console.log(collapsed);
+    this.setState({
+      collapsed,
+      mode: collapsed ? 'vertical' : 'inline',
+    });
   }
 
   componentDidMount () {
     this.props.getAllMenu()
   }
 
-  menuClickHandle (item) {
+  menuClickHandle = (item) => {
     this.setState({
       activeKey: 'menu'+item.key
     })
@@ -65,7 +73,11 @@ class Sidebar extends React.Component {
       )
     });
     return (
-      <aside className="ant-layout-sider">
+      <Sider
+          collapsible
+          collapsed={this.state.collapsed}
+          onCollapse={this.onCollapse}
+        >
         <div className="ant-layout-logo"></div>
         <Menu
           mode="inline" theme="dark" openKeys={openKey}
@@ -74,7 +86,7 @@ class Sidebar extends React.Component {
         >
           {menu}
         </Menu>
-      </aside>
+      </Sider>
     )
   }
 }

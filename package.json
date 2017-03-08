@@ -16,7 +16,7 @@
   "author": "fireyy",
   "license": "MIT",
   "dependencies": {
-    "antd": "^2.0.0",
+    "antd": "^2.8.0",
     "axios": "^0.15.3",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",

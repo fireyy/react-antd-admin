@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {Affix , Row, Col} from 'antd';
+import {Layout, Affix , Row, Col} from 'antd';
 
 import NavPath from '../../components/NavPath'
 import Header from '../../components/Header'
@@ -10,6 +10,8 @@ import Footer from '../../components/Footer'
 import {fetchProfile, logout} from '../../actions/auth';
 
 import './index.less';
+
+const { Content } = Layout;
 
 class App extends React.Component {
   constructor(props) {
@@ -25,19 +27,19 @@ class App extends React.Component {
     const {auth, actions} = this.props;
 
     return (
-      <div className="ant-layout-aside">
+      <Layout className="ant-layout-has-sider">
         <Sidebar />
-        <div className="ant-layout-main">
+        <Layout>
           <Header profile={auth} logout={actions.logout} />
-          <NavPath />
-          <div className="ant-layout-container">
-            <div className="ant-layout-content">
+          <Content style={{ margin: '0 16px' }}>
+            <NavPath />
+            <div style={{ minHeight: 360 }}>
               {this.props.children}
             </div>
-          </div>
+          </Content>
           <Footer />
-        </div>
-      </div>
+        </Layout>
+      </Layout>
     );
   }
 }

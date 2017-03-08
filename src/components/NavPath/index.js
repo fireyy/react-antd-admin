@@ -26,12 +26,10 @@ class NavPath extends React.Component {
       )
     })
     return (
-      <div className="ant-layout-breadcrumb">
-        <Breadcrumb>
-          <Breadcrumb.Item key='bc-0'>首页</Breadcrumb.Item>
-          {bread}
-        </Breadcrumb>
-      </div>
+      <Breadcrumb style={{ margin: '12px 0' }}>
+        <Breadcrumb.Item key='bc-0'>首页</Breadcrumb.Item>
+        {bread}
+      </Breadcrumb>
     )
   }
 }
