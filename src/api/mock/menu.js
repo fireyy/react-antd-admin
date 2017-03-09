@@ -2,26 +2,23 @@ module.exports = {
     menus: [
       {
         key: 1,
-        name: 'Dashboard',
+        name: 'Pages',
         icon: 'user',
         child: [
           {
-            name: '选项1',
+            name: 'Dashboard',
             key: 101,
             url: '/home'
           },
           {
-            name: '选项2',
+            name: 'Form',
             key: 102,
+            url: '/form'
+          },          
+          {
+            name: '选项2',
+            key: 103,
             url: '/page2'
-          },
-          {
-            name: '选项3',
-            key: 103
-          },
-          {
-            name: '选项4',
-            key: 104
           }
         ]
       },

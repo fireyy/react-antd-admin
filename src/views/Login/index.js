@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Form, Input, Button, Row, Col, notification } from 'antd'
+import { Form, Input, Button, Row, Col, Icon, notification } from 'antd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth'
@@ -70,31 +70,21 @@ class Login extends React.Component {
     return (
       <Row className="login-row" type="flex" justify="space-around" align="middle">
         <Col span="8"> 
-          <Form horizontal onSubmit={this.handleSubmit.bind(this)} className="login-form">
+          <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)} className="login-form">
             <h2 className="logo"><span>logo</span></h2>
-            <FormItem
-              label='用户名：'
-              labelCol={{ span: 6 }}
-              wrapperCol={{ span: 14 }}
-            >
+            <FormItem>
               {getFieldDecorator('user')(
-                <Input placeholder='admin' />
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder='admin' />
               )}
             </FormItem>
-            <FormItem
-              label='密码：'
-              labelCol={{ span: 6 }}
-              wrapperCol={{ span: 14 }}
-            >
+            <FormItem>
               {getFieldDecorator('password')(
-                <Input type='password' placeholder='123456' />
+                <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type='password' placeholder='123456' />
               )}
             </FormItem>
-            <Row>
-              <Col span='14' offset='6'>
-                <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
-              </Col>
-            </Row>
+            <p>
+              <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
+            </p>
           </Form>
         </Col>
       </Row>

@@ -5,6 +5,7 @@ import { AppContainer } from 'react-hot-loader';
 import App from '../views/App';
 import Home from '../views/Home';
 import Login from '../views/Login';
+import Form from '../views/Form';
 import Page2 from '../views/Page2';
 
 const validate = function (next, replace, callback) {
@@ -20,6 +21,7 @@ const routes = (
     <IndexRedirect to="home" />
     <Route component={App}>
       <Route path="home" component={Home}/>
+      <Route path="form" component={Form}/>
       <Route path="page2" component={Page2}/>
     </Route>
     <Route path="login" component={Login}/>
