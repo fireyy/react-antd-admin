@@ -22,6 +22,7 @@ const { Sider } = Layout;
 class Sidebar extends React.Component {
 
   state = {
+    openKey: "",
     activeKey: "",
     collapsed: false,
     mode: 'inline',
@@ -38,20 +39,32 @@ class Sidebar extends React.Component {
     this.props.getAllMenu()
   }
 
+  componentWillReceiveProps(nextProps) {
+    nextProps.items.map((item, i) => {
+      item.child.map((node) => {
+        if(node.url && this.context.router.isActive(node.url, true)){
+          this.menuClickHandle({
+            key: 'menu'+node.key,
+            keyPath: ['menu'+node.key, 'sub'+item.key]
+          })
+        }
+      })
+    });
+  }
+
   menuClickHandle = (item) => {
     this.setState({
-      activeKey: 'menu'+item.key
+      activeKey: item.key
     })
     this.props.updateNavPath(item.keyPath, item.key)
   }
 
   render () {
-    const { items } = this.props
+    const { items, updateNavPath } = this.props
     const { router } = this.context
-    let openKey = []
-    let activeKey = this.state.activeKey
-    const menu = items.map((item) => {
-      openKey.push('sub'+item.key)
+    let { activeKey, openKey } = this.state
+
+    const menu = items.map((item, i) => {
       return (
         <SubMenu
           key={'sub'+item.key}
@@ -60,11 +73,11 @@ class Sidebar extends React.Component {
           {item.child.map((node) => {
             if(node.url && router.isActive(node.url, true)){
               activeKey = 'menu'+node.key
+              openKey = 'sub'+item.key
             }
-            let url = node.url
             return (
               <Menu.Item key={'menu'+node.key}>
-                <Link to={url}>{node.name}</Link>
+                <Link to={node.url}>{node.name}</Link>
               </Menu.Item>
             )
           })}
@@ -82,6 +95,7 @@ class Sidebar extends React.Component {
         <Menu
           mode={this.state.mode} theme="dark"
           selectedKeys={[activeKey]}
+          openKeys={[openKey]}
           onClick={this.menuClickHandle}
         >
           {menu}

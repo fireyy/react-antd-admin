@@ -29,31 +29,31 @@ class Login extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      const error = nextProps.loginErrors;
-      const isLoggingIn = nextProps.loggingIn;
-      const user = nextProps.user
+    const error = nextProps.loginErrors;
+    const isLoggingIn = nextProps.loggingIn;
+    const user = nextProps.user
 
-      this.setState({
-        loading: false
+    this.setState({
+      loading: false
+    });
+
+    if (error != this.props.loginErrors && error) {
+      notification.error({
+        message: 'Login Fail',
+        description: error
       });
+    }
 
-      if (error != this.props.loginErrors && error) {
-          notification.error({
-              message: 'Login Fail',
-              description: error
-          });
-      }
+    if (!isLoggingIn && !error && user)  {
+      notification.success({
+        message: 'Login Success',
+        description: 'Welcome ' + user
+      });
+    }
 
-      if (!isLoggingIn && !error && user)  {
-          notification.success({
-              message: 'Login Success',
-              description: 'Welcome ' + user
-          });
-      }
-
-      if (user) {
-          this.context.router.replace('/home');
-      }
+    if (user) {
+      this.context.router.replace('/home');
+    }
   }
 
   handleSubmit (e) {
@@ -69,7 +69,7 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form
     return (
       <Row className="login-row" type="flex" justify="space-around" align="middle">
-        <Col span="8"> 
+        <Col span="8">
           <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)} className="login-form">
             <h2 className="logo"><span>logo</span></h2>
             <FormItem>

@@ -16,7 +16,6 @@ export default class commonHeader extends React.Component {
 
   handleLogOut = () => {
     const {logout} = this.props
-    console.log(this)
     logout().payload.promise.then(() => {
       this.context.router.replace('/login');
     });
