@@ -16,8 +16,13 @@ module.exports = {
             url: '/form'
           },          
           {
-            name: '选项2',
+            name: 'Table',
             key: 103,
+            url: '/table'
+          },
+          {
+            name: '选项2',
+            key: 104,
             url: '/page2'
           }
         ]
