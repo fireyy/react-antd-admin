@@ -28,7 +28,7 @@ $ cd react-antd-admin
 $ npm install
 ```
 
-## Run Production
+## Run Dev
 
 ```shell
 $ npm run dev
