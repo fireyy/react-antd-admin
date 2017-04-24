@@ -22,8 +22,8 @@ const { Sider } = Layout;
 class Sidebar extends React.Component {
 
   state = {
-    openKey: "",
-    activeKey: "",
+    openKey: "sub1",
+    activeKey: "menu101",
     collapsed: false,
     mode: 'inline',
   }
@@ -95,7 +95,7 @@ class Sidebar extends React.Component {
         <Menu
           mode={this.state.mode} theme="dark"
           selectedKeys={[activeKey]}
-          openKeys={[openKey]}
+          defaultOpenKeys={[openKey]}
           onClick={this.menuClickHandle}
         >
           {menu}
