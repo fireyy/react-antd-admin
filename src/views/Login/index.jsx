@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { Form, Input, Button, Row, Col, Icon, notification } from 'antd'
+import { Form, Input, Button, Row, Col, Icon, message } from 'antd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { login } from '../../actions/auth'
@@ -38,17 +38,11 @@ class Login extends React.Component {
     });
 
     if (error != this.props.loginErrors && error) {
-      notification.error({
-        message: 'Login Fail',
-        description: error
-      });
+      message.error(error);
     }
 
     if (!isLoggingIn && !error && user)  {
-      notification.success({
-        message: 'Login Success',
-        description: 'Welcome ' + user
-      });
+      message.success('Welcome ' + user.name);
     }
 
     if (user) {
