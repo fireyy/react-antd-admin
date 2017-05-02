@@ -27,7 +27,7 @@ export default function auth(state = initialState, action = {}) {
         ...state,
         loggingIn: false,
         user: null,
-        loginErrors: action.payload.message
+        loginErrors: action.payload.response.data.message
       };
     case LOGOUT_SUCCESS:
       window.localStorage.removeItem('uid');
