@@ -40,8 +40,8 @@ class Sidebar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    nextProps.items.map((item, i) => {
-      item.child.map((node) => {
+    Array.isArray(nextProps.items) && nextProps.items.map((item, i) => {
+      Array.isArray(item.child) && item.child.map((node) => {
         if(node.url && this.context.router.isActive(node.url, true)){
           this.menuClickHandle({
             key: 'menu'+node.key,
@@ -64,26 +64,35 @@ class Sidebar extends React.Component {
     const { router } = this.context
     let { activeKey, openKey } = this.state
 
-    const menu = items.map((item, i) => {
-      return (
-        <SubMenu
-          key={'sub'+item.key}
-          title={<span><Icon type={item.icon} /><span className="nav-text">{item.name}</span></span>}
-        >
-          {item.child.map((node) => {
-            if(node.url && router.isActive(node.url, true)){
-              activeKey = 'menu'+node.key
-              openKey = 'sub'+item.key
-            }
-            return (
-              <Menu.Item key={'menu'+node.key}>
-                <Link to={node.url}>{node.name}</Link>
-              </Menu.Item>
-            )
-          })}
-        </SubMenu>
-      )
-    });
+    const _menuProcess = (nodes, pkey) => {
+      console.log(nodes)
+      return Array.isArray(nodes) && nodes.map((item, i) => {
+        const menu = _menuProcess(item.child, item.key);
+        if(item.url && router.isActive(item.url, true)){
+          activeKey = 'menu'+item.key
+          openKey = 'sub'+pkey
+        }
+        if (menu.length > 0) {
+          return (
+            <SubMenu
+              key={'sub'+item.key}
+              title={<span><Icon type={item.icon} /><span className="nav-text">{item.name}</span></span>}
+            >
+              {menu}
+            </SubMenu>
+          )
+        } else {
+          return (
+            <Menu.Item key={'menu'+item.key}>
+              <Link to={item.url}>{item.icon && <Icon type={item.icon} />}{item.name}</Link>
+            </Menu.Item>
+          )
+        }
+      });
+    }
+
+    const menu = _menuProcess(items);
+
     return (
       <Sider
           trigger={null}

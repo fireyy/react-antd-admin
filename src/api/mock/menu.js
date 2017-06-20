@@ -1,20 +1,21 @@
 module.exports = {
     menus: [
       {
+        key: 5,
+        name: 'Home',
+        icon: 'home',
+        url: '/home'
+      },
+      {
         key: 1,
         name: 'Pages',
         icon: 'user',
         child: [
           {
-            name: 'Dashboard',
-            key: 101,
-            url: '/home'
-          },
-          {
             name: 'Form',
             key: 102,
             url: '/form'
-          },          
+          },
           {
             name: 'Table',
             key: 103,

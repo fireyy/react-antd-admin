@@ -17,7 +17,7 @@ export default function menu(state = initialState, action = {}) {
       return Object.assign({}, initialState, {items: action.payload.data.menus});
     case UPDATE_NAVPATH:
       let navpath = [], tmpOb, tmpKey, child;
-      if(action.payload.data){
+      if(Array.isArray(action.payload.data)){
         action.payload.data.reverse().map((item)=>{
           if(item.indexOf('sub') != -1){
             tmpKey = item.replace('sub', '');
