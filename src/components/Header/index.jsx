@@ -4,7 +4,7 @@ import './index.less'
 import { Link } from 'react-router'
 
 const contextTypes = {
-  router: PropTypes.object.isRequired
+  router: PropTypes.object
 };
 
 const { Header } = Layout;
@@ -56,7 +56,7 @@ export default class commonHeader extends React.Component {
           <Col span={3}>
             <Dropdown overlay={menu}>
               <a className="ant-dropdown-link" href="#">
-                <Icon type="user" /> {username} <Icon type="down" />
+                <Icon type="user" /> <span>{username}</span> <Icon type="down" />
               </a>
             </Dropdown>
           </Col>
