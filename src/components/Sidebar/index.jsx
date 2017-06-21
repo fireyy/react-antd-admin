@@ -65,7 +65,6 @@ class Sidebar extends React.Component {
     let { activeKey, openKey } = this.state
 
     const _menuProcess = (nodes, pkey) => {
-      console.log(nodes)
       return Array.isArray(nodes) && nodes.map((item, i) => {
         const menu = _menuProcess(item.child, item.key);
         if(item.url && router.isActive(item.url, true)){

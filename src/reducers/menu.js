@@ -36,11 +36,11 @@ export default function menu(state = initialState, action = {}) {
               tmpOb = _.find(child, function(o) {
                 return o.key == tmpKey;
               });
+              navpath.push({
+                key: tmpOb.key,
+                name: tmpOb.name
+              });
             }
-            navpath.push({
-              key: tmpOb.key,
-              name: tmpOb.name
-            })
           }
         })
       }
