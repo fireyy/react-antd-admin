@@ -22,20 +22,31 @@ module.exports = {
             url: '/table'
           },
           {
-            name: '选项2',
+            name: 'Calendar',
             key: 104,
-            url: '/page2'
+            url: '/calendar'
+          },
+          {
+            name: 'Timeline',
+            key: 105,
+            url: '/timeline'
+          },
+          {
+            name: 'Steps',
+            key: 106,
+            url: '/steps'
           }
         ]
       },
       {
         key: 2,
-        name: '导航二',
+        name: 'Components',
         icon: 'laptop',
         child: [
           {
-            name: '选项5',
-            key: 201
+            name: 'Cards',
+            key: 201,
+            url: '/cards'
           },
           {
             name: '选项2',

@@ -14,7 +14,7 @@ import './index.less'
 
 var Shape = GM.Shape;
 var G = GM.G;
-//自定义绘制数据的的形状      
+//自定义绘制数据的的形状
 Shape.registShape('point', 'dashBoard', {
   getShapePoints:function(cfg){
     var x = cfg.x;
@@ -71,22 +71,22 @@ const Pie = createGM(chart => {
   });
   chart.axis('y', false);
   //绘制仪表盘辅助元素
-  chart.guide().arc([0,1.05],[4.8,1.05],{ 
+  chart.guide().arc([0,1.05],[4.8,1.05],{
     strokeStyle: '#18b7d6',
     lineWidth:5,
     lineCap: 'round'
   });
-  chart.guide().arc([5.2,1.05],[9.8,1.05],{ 
+  chart.guide().arc([5.2,1.05],[9.8,1.05],{
     strokeStyle: '#ccc',
     lineWidth:5,
     lineCap: 'round'
   });
-  chart.guide().arc([10.2,1.05],[15,1.05],{ 
+  chart.guide().arc([10.2,1.05],[15,1.05],{
     strokeStyle: '#ccc',
     lineWidth:5,
     lineCap: 'round'
   });
-  chart.guide().arc([0,1.2],[15,1.2],{ 
+  chart.guide().arc([0,1.2],[15,1.2],{
     strokeStyle: '#ccc',
     lineWidth:1
   });
@@ -159,13 +159,13 @@ const Bar = createGM(chart => {
   //配置刻度文字大小，供PC端显示用(移动端可以使用默认值20px)
   chart.axis('time', {
     label:{
-      fontSize: 14 
+      fontSize: 14
     },
     grid: null
   });
   chart.axis('tem', {
     label:{
-      fontSize: 14 
+      fontSize: 14
     }
   });
   chart.intervalStack().position('time*tem').color('city');
@@ -211,12 +211,14 @@ export default class Home extends React.Component {
 
     return (
       <div>
-        <Alert
-          message="消息提示的文案"
-          description="消息提示的辅助性文字介绍消息提示的辅助性文，字介绍消息提示的辅助性文字介绍"
-          type="info"
-          showIcon
-        />
+        <div style={{'margin-bottom': '20px'}}>
+          <Alert
+            message="消息提示的文案"
+            description="消息提示的辅助性文字介绍消息提示的辅助性文，字介绍消息提示的辅助性文字介绍"
+            type="info"
+            showIcon
+          />
+        </div>
         <Row gutter={16} type="flex" justify="space-between">
           <Col xs={24} md={14}>
             <Row gutter={16} type="flex" justify="space-between">
@@ -267,7 +269,7 @@ export default class Home extends React.Component {
             </PanelBox>
           </Col>
         </Row>
-        
+
         <PanelBox title="最近的数据">
           <Table columns={columns} dataSource={tableData} pagination={{ pageSize: 50 }} scroll={{ y: 240 }} />
         </PanelBox>
