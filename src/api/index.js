@@ -33,4 +33,4 @@ mock.onGet('/randomuser').reply((config) => {
   });
 });
 
-module.exports = mockAxios;
+export default mockAxios;
