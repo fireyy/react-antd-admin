@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import route from '../route';
-import { Router, hashHistory } from 'react-router';
+import { HashRouter as Router } from 'react-router-dom';
 
 export default class Root extends Component {
   render() {
@@ -9,7 +9,7 @@ export default class Root extends Component {
     if (!this.route) this.route = route;
     return (
       <Provider store={store}>
-        <Router routes={this.route} history={hashHistory} />
+        <Router children={this.route}/>
       </Provider>
     );
   }
