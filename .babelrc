@@ -1,4 +1,13 @@
 {
-  "presets": ["es2015", "react", "stage-0"],
-  "plugins": ["lodash", "react-hot-loader/babel", "transform-runtime", "transform-decorators-legacy", "add-module-exports", ["import", [{ "libraryName": "antd", "style": "css" }]]]
+  "presets": [
+    ["env", { "modules": false }],
+    "react",
+    "stage-2"
+  ],
+  "plugins": ["lodash", "react-hot-loader/babel", "syntax-dynamic-import", "transform-runtime", "transform-decorators-legacy", ["import", [{ "libraryName": "antd", "style": "css" }]]],
+  "env": {
+    "test": {
+      "presets": ["env", "react", "stage-2"]
+    }
+  }
 }
