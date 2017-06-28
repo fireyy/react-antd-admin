@@ -211,9 +211,9 @@ export default class Home extends React.Component {
 
     return (
       <div>
-        <div style={{'margin-bottom': '20px'}}>
+        <div style={{'marginBottom': '20px'}}>
           <Alert
-            message="消息提示的文案"
+            message="消息提示的文案1"
             description="消息提示的辅助性文字介绍消息提示的辅助性文，字介绍消息提示的辅助性文字介绍"
             type="info"
             showIcon

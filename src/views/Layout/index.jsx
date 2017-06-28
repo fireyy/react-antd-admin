@@ -1,13 +1,18 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types'
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Layout, Affix , Row, Col} from 'antd';
+import { Route, Redirect } from 'react-router-dom';
 
-import NavPath from '../../components/NavPath'
-import Header from '../../components/Header'
-import Sidebar from '../../components/Sidebar'
-import Footer from '../../components/Footer'
-import {fetchProfile, logout} from '../../actions/auth';
+import { childRoutes } from '@/route'
+import authHOC from '@/utils/auth'
+
+import NavPath from '@/components/NavPath'
+import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
+import Footer from '@/components/Footer'
+import {fetchProfile, logout} from '@/actions/auth';
 
 import './index.less';
 
@@ -34,7 +39,10 @@ class App extends React.Component {
           <Content style={{ margin: '0 16px' }}>
             <NavPath />
             <div style={{ minHeight: 360 }}>
-              {this.props.children}
+              <Redirect to="/home"/>
+              {childRoutes.map((route, index) => (
+                <Route key={index} path={route.path} component={authHOC(route.component)} exactly={route.exactly} />
+              ))}
             </div>
           </Content>
           <Footer />
@@ -45,8 +53,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  user: PropTypes.object,
-  children: PropTypes.node.isRequired
+  user: PropTypes.object
 };
 
 const mapStateToProps = (state) => {

@@ -15,7 +15,7 @@ export default function configureStore(initialState) {
 
   if (process.env.NODE_ENV === 'development') {
     const persistState = require('redux-devtools').persistState;
-    const DevTools = require('../containers/DevTools');
+    const DevTools = require('../containers/DevTools').default;
 
     const enhancer = compose(
       DevTools.instrument(),

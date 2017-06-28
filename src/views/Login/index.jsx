@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Form, Input, Button, Row, Col, Icon, message } from 'antd'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom';
 import { login } from '../../actions/auth'
 
 const FormItem = Form.Item
@@ -14,11 +16,6 @@ const propTypes = {
   loginErrors: PropTypes.string
 };
 
-const contextTypes = {
-  router: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired
-};
-
 class Login extends React.Component {
 
   constructor (props) {
@@ -28,35 +25,28 @@ class Login extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const error = nextProps.loginErrors;
-    const isLoggingIn = nextProps.loggingIn;
-    const user = nextProps.user
-
-    this.setState({
-      loading: false
-    });
-
-    if (error != this.props.loginErrors && error) {
-      message.error(error);
-    }
-
-    if (!isLoggingIn && !error && user)  {
-      message.success('Welcome ' + user.name);
-    }
-
-    if (user) {
-      this.context.router.replace('/home');
-    }
-  }
-
   handleSubmit (e) {
     e.preventDefault();
     this.setState({
       loading: true
     });
     const data = this.props.form.getFieldsValue()
-    this.props.login(data.user, data.password)
+    this.props.login(data.user, data.password).payload.promise.then(res => {
+      this.setState({
+        loading: false
+      });
+      if (res.error) {
+        message.error(res.payload.response.data.message);
+      }
+      if (!res.error && res.payload.data)  {
+        message.success('Welcome ' + res.payload.data.name);
+        this.props.history.replace('/');
+      }
+    }).catch(err => {
+      this.setState({
+        loading: false
+      });
+    })
   }
 
   render () {
@@ -87,8 +77,6 @@ class Login extends React.Component {
   }
 }
 
-Login.contextTypes = contextTypes;
-
 Login.propTypes = propTypes;
 
 Login = Form.create()(Login);
@@ -108,4 +96,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

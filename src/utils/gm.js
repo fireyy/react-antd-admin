@@ -1,5 +1,6 @@
 import GM from 'g2-mobile';
 import React from 'react';
+import PropTypes from 'prop-types';
 
 let uniqueId = 0;
 function generateUniqueId() {
@@ -54,7 +55,7 @@ export default function createGM(__operation, height = null) {
   }
 
   Component.propTypes = {
-    data: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    data: PropTypes.arrayOf(PropTypes.object).isRequired
   };
 
   return Component;

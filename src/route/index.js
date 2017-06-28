@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Route, IndexRedirect } from 'react-router';
-import { AppContainer } from 'react-hot-loader';
+import { Route, Switch } from 'react-router-dom';
 
-import App from '../views/App';
-import Home from '../views/Home';
+import Layout from '../views/Layout';
 import Login from '../views/Login';
-import Form from '../views/Form';
-import Table from '../views/Table';
-import Calendar from '../views/Calendar';
-import Timeline from '../views/Timeline';
-import Steps from '../views/Steps';
-import Cards from '../views/Cards';
-import Mailbox from '../views/Mailbox';
-import Page2 from '../views/Page2';
+
+import Home from '@/views/Home';
+import Form from '@/views/Form';
+import Table from '@/views/Table';
+import Calendar from '@/views/Calendar';
+import Timeline from '@/views/Timeline';
+import Steps from '@/views/Steps';
+import Cards from '@/views/Cards';
+import Mailbox from '@/views/Mailbox';
+import Page2 from '@/views/Page2';
 
 const validate = function (next, replace, callback) {
   const isLoggedIn = !!window.localStorage.getItem('uid')
@@ -22,21 +22,51 @@ const validate = function (next, replace, callback) {
   callback()
 }
 
+export const childRoutes = [
+  {
+    'path':'/home',
+    'component': Home,
+    'exactly': true
+  },
+  {
+    'path':'/form',
+    'component': Form
+  },
+  {
+    'path':'/table',
+    'component': Table
+  },
+  {
+    'path':'/calendar',
+    'component': Calendar
+  },
+  {
+    'path':'/timeline',
+    'component': Timeline
+  },
+  {
+    'path':'/steps',
+    'component': Steps
+  },
+  {
+    'path':'/cards',
+    'component': Cards
+  },
+  {
+    'path':'/mailbox',
+    'component': Mailbox
+  },
+  {
+    'path':'/page2',
+    'component': Page2
+  }
+];
+
 const routes = (
-  <Route path="/" onEnter={validate}>
-    <IndexRedirect to="home" />
-    <Route component={App}>
-      <Route path="home" component={Home}/>
-      <Route path="form" component={Form}/>
-      <Route path="table" component={Table}/>
-      <Route path="calendar" component={Calendar}/>
-      <Route path="timeline" component={Timeline}/>
-      <Route path="steps" component={Steps}/>
-      <Route path="cards" component={Cards}/>
-      <Route path="mailbox" component={Mailbox}/>
-    </Route>
-    <Route path="login" component={Login}/>
-  </Route>
+  <Switch>
+    <Route path="/login" component={Login}/>
+    <Route path="/" component={Layout}/>
+  </Switch>
 );
 
 export default routes
