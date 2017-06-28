@@ -48,6 +48,11 @@ $ npm run build
 
 ## Changelog
 
+### 0.2.0
+
+* 更新 React 到 15.6.x
+* 更新 webpack 到 2.x
+
 ### 0.1.2
 
 * 更新依赖组件到最新版本
