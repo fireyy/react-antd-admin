@@ -1,8 +1,10 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withRouter, matchPath } from 'react-router'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Layout, Menu, Icon } from 'antd'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { getAllMenu, updateNavPath } from '../../actions/menu'
 
 const SubMenu = Menu.SubMenu
@@ -18,6 +20,14 @@ const propTypes = {
 }
 
 const { Sider } = Layout;
+
+const isActive = (path, history) => {
+  return matchPath(path, {
+    path: history.location.pathname,
+    exact: true,
+    strict: false
+  })
+}
 
 class Sidebar extends React.Component {
 
@@ -42,7 +52,7 @@ class Sidebar extends React.Component {
   componentWillReceiveProps(nextProps) {
     Array.isArray(nextProps.items) && nextProps.items.map((item, i) => {
       Array.isArray(item.child) && item.child.map((node) => {
-        if(node.url && this.context.router.isActive(node.url, true)){
+        if(node.url && isActive(node.url, this.props.history)){
           this.menuClickHandle({
             key: 'menu'+node.key,
             keyPath: ['menu'+node.key, 'sub'+item.key]
@@ -60,14 +70,13 @@ class Sidebar extends React.Component {
   }
 
   render () {
-    const { items, updateNavPath } = this.props
-    const { router } = this.context
+    const { items, updateNavPath, history } = this.props
     let { activeKey, openKey } = this.state
 
     const _menuProcess = (nodes, pkey) => {
       return Array.isArray(nodes) && nodes.map((item, i) => {
         const menu = _menuProcess(item.child, item.key);
-        if(item.url && router.isActive(item.url, true)){
+        if(item.url && isActive(item.url, history)){
           activeKey = 'menu'+item.key
           openKey = 'sub'+pkey
         }
@@ -83,7 +92,9 @@ class Sidebar extends React.Component {
         } else {
           return (
             <Menu.Item key={'menu'+item.key}>
-              <Link to={item.url}>{item.icon && <Icon type={item.icon} />}{item.name}</Link>
+              {
+                item.url ? <Link to={item.url}>{item.icon && <Icon type={item.icon} />}{item.name}</Link> : <span>{item.icon && <Icon type={item.icon} />}{item.name}</span>
+              }
             </Menu.Item>
           )
         }
@@ -122,9 +133,6 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = propTypes;
 Sidebar.defaultProps = defaultProps;
-Sidebar.contextTypes = {
-  router: React.PropTypes.object
-}
 
 function mapStateToProps(state) {
 
@@ -140,4 +148,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Sidebar))

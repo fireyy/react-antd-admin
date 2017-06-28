@@ -1,15 +1,12 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Layout, Row, Col, Icon, Badge, Menu, Dropdown, Avatar, Popover } from 'antd'
 import './index.less'
-import { Link } from 'react-router'
-
-const contextTypes = {
-  router: PropTypes.object
-};
+import { Link, withRouter } from 'react-router-dom'
 
 const { Header } = Layout;
 
-export default class commonHeader extends React.Component {
+class commonHeader extends React.Component {
   constructor () {
     super()
   }
@@ -17,7 +14,7 @@ export default class commonHeader extends React.Component {
   handleLogOut = () => {
     const {logout} = this.props
     logout().payload.promise.then(() => {
-      this.context.router.replace('/login');
+      this.props.history.replace('/login');
     });
   }
 
@@ -51,9 +48,9 @@ export default class commonHeader extends React.Component {
     return (
       <Header style={{ background: '#fff', padding: 0 }}>
         <Row type="flex" justify="end" align="middle">
-          <Col span={4}>
+          <Col span={3}>
             <Badge className="header-icon" count={5}>
-              <Link to="mailbox">
+              <Link to="/mailbox">
                 <Icon type="mail" />
               </Link>
             </Badge>
@@ -65,10 +62,10 @@ export default class commonHeader extends React.Component {
               </Badge>
             </Popover>
           </Col>
-          <Col span={4}>
+          <Col span={3}>
             <Dropdown overlay={menu}>
               <a className="ant-dropdown-link" href="#">
-                <Avatar icon="user" /> <span>{username}</span> <Icon type="down" />
+                <Avatar style={{ verticalAlign: 'middle'}}>{username}</Avatar> <Icon type="down" />
               </a>
             </Dropdown>
           </Col>
@@ -78,4 +75,4 @@ export default class commonHeader extends React.Component {
   }
 }
 
-commonHeader.contextTypes = contextTypes;
+export default withRouter(commonHeader)
