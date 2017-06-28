@@ -29,7 +29,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {auth, actions} = this.props;
+    const {auth, navpath, actions} = this.props;
 
     return (
       <Layout className="ant-layout-has-sider">
@@ -37,7 +37,7 @@ class App extends React.Component {
         <Layout>
           <Header profile={auth} logout={actions.logout} />
           <Content style={{ margin: '0 16px' }}>
-            <NavPath />
+            <NavPath data={navpath} />
             <div style={{ minHeight: 360 }}>
               <Redirect to="/home"/>
               {childRoutes.map((route, index) => (
@@ -53,13 +53,15 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  user: PropTypes.object
+  auth: PropTypes.object,
+  navpath: PropTypes.array
 };
 
 const mapStateToProps = (state) => {
-  const {auth} = state;
+  const { auth, menu } = state;
   return {
-      auth: auth ? auth : null,
+    auth: auth ? auth : null,
+    navpath: menu.navpath
   };
 };
 
