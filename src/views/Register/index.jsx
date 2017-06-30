@@ -45,7 +45,7 @@ class Register extends React.Component {
       this.setState({
         loading: false
       });
-      this.props.history.replace('/login');
+      this.toLogin();
       message.success("Welcome " + data.user + " please login.")
     }
   }
@@ -94,19 +94,4 @@ Register.propTypes = propTypes;
 
 Register = Form.create()(Register);
 
-function mapStateToProps(state) {
-  const {auth} = state;
-  if (auth.user) {
-      return {user: auth.user, loggingIn: auth.loggingIn, loginErrors: ''};
-  }
-
-  return {user: null, loggingIn: auth.loggingIn, loginErrors: auth.loginErrors};
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    login: bindActionCreators(login, dispatch)
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))
+export default withRouter(connect()(Register))
