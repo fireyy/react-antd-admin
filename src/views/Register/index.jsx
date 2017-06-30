@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { login } from '../../actions/auth'
+
 const FormItem = Form.Item
 
 import './index.less'
@@ -15,7 +16,7 @@ const propTypes = {
   loginErrors: PropTypes.string
 };
 
-class Login extends React.Component {
+class Register extends React.Component {
 
   constructor (props) {
     super(props);
@@ -30,34 +31,29 @@ class Login extends React.Component {
       loading: true
     });
     const data = this.props.form.getFieldsValue()
-    this.props.login(data.user, data.password).payload.promise.then(res => {
+    if (data.user ===  undefined || data.password === undefined) {
       this.setState({
         loading: false
       });
-      if (res.error) {
-        message.error(res.payload.response.data.message);
-      }
-      if (!res.error && res.payload.data)  {
-        message.success('Welcome ' + res.payload.data.name);
-        this.props.history.replace('/');
-      }
-    }).catch(err => {
+      message.error("Incorrect user or password");
+    } else {
       this.setState({
         loading: false
       });
-    })
+      message.success("Welcome " + data.user)
+    }
   }
-
-  toRegister () {
-    this.props.history.replace('/register');
+  
+  toLogin () {
+    this.props.history.replace('/login');
   }
 
   render () {
     const { getFieldDecorator } = this.props.form
     return (
-      <Row className="login-row" type="flex" justify="space-around" align="middle">
+      <Row className="register-row" type="flex" justify="space-around" align="middle">
         <Col span="8">
-          <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)} className="login-form">
+          <Form layout="horizontal" onSubmit={this.handleSubmit.bind(this)} className="register-form">
             <h2 className="logo"><span>logo</span></h2>
             <FormItem>
               {getFieldDecorator('user')(
@@ -70,10 +66,10 @@ class Login extends React.Component {
               )}
             </FormItem>
             <p>
-              <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>登录</Button>
+              <Button className="btn-register" type='primary' size="large" icon="right-square-o" loading={this.state.loading} htmlType='submit'>注册</Button>
             </p>
             <p>
-              <Button className="btn-register" size="large" icon="right-square-o" htmlType='button' onClick={this.toRegister.bind(this)} >去注册</Button>
+              <Button className="btn-login" size="large" icon="poweroff" htmlType='button' onClick={this.toLogin.bind(this)}>去登录</Button>
             </p>
           </Form>
         </Col>
@@ -83,9 +79,9 @@ class Login extends React.Component {
   }
 }
 
-Login.propTypes = propTypes;
+Register.propTypes = propTypes;
 
-Login = Form.create()(Login);
+Register = Form.create()(Register);
 
 function mapStateToProps(state) {
   const {auth} = state;
@@ -102,4 +98,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Register))
