@@ -14,14 +14,6 @@ import Cards from '@/views/Cards';
 import Mailbox from '@/views/Mailbox';
 import Page2 from '@/views/Page2';
 
-const validate = function (next, replace, callback) {
-  const isLoggedIn = !!window.localStorage.getItem('uid')
-  if (!isLoggedIn && next.location.pathname != '/login') {
-    replace('/login')
-  }
-  callback()
-}
-
 export const childRoutes = [
   {
     'path':'/home',
