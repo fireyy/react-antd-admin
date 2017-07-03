@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 import { login } from '../../actions/auth'
-
 const FormItem = Form.Item
 
 import './index.less'
@@ -49,6 +48,10 @@ class Login extends React.Component {
     })
   }
 
+  toRegister () {
+    this.props.history.replace('/register');
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form
     return (
@@ -67,7 +70,10 @@ class Login extends React.Component {
               )}
             </FormItem>
             <p>
-              <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>确定</Button>
+              <Button className="btn-login" type='primary' size="large" icon="poweroff" loading={this.state.loading} htmlType='submit'>登录</Button>
+            </p>
+            <p>
+              <Button className="btn-register" size="large" icon="right-square-o" htmlType='button' onClick={this.toRegister.bind(this)} >去注册</Button>
             </p>
           </Form>
         </Col>
