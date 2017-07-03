@@ -1,20 +1,10 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Form, Input, Button, Row, Col, Icon, message } from 'antd'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { login } from '../../actions/auth'
 
 const FormItem = Form.Item
 
 import './index.less'
-
-const propTypes = {
-  user: PropTypes.object,
-  loggingIn: PropTypes.bool,
-  loginErrors: PropTypes.string
-};
 
 class Register extends React.Component {
 
@@ -49,7 +39,7 @@ class Register extends React.Component {
       message.success("Welcome " + data.user + " please login.")
     }
   }
-  
+
   toLogin () {
     this.props.history.replace('/login');
   }
@@ -90,8 +80,6 @@ class Register extends React.Component {
   }
 }
 
-Register.propTypes = propTypes;
-
 Register = Form.create()(Register);
 
-export default withRouter(connect()(Register))
+export default withRouter(Register)
