@@ -7,7 +7,7 @@
     "test": "NODE_ENV=test mocha --require babel-register tests/.setup.js tests/**/*-test.js --compilers css:mocha-compiler.js",
     "build": "node build/build.js",
     "dev": "node build/dev-server.js",
-    "deploy": "now ./dist -n react-antd-admin"
+    "deploy": "cd ./dist && surge"
   },
   "repository": {
     "type": "git",

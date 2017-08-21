@@ -1,7 +1,7 @@
 ## React Ant.Design Admin UI
 
 <p align="center">
-  <a href="https://react-antd-admin.now.sh" target="_blank">
+  <a href="https://react-antd-admin.surge.sh" target="_blank">
     <img src="demo.png" width="700px">
     <br>
     Live Demo
