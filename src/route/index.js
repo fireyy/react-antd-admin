@@ -1,57 +1,94 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+import Bundle from '@/route/bundle';
 import Layout from '../views/Layout';
 import Login from '../views/Login';
 import Register from '../views/Register';
 
-import Home from '@/views/Home';
-import Form from '@/views/Form';
-import Table from '@/views/Table';
-import Calendar from '@/views/Calendar';
-import Timeline from '@/views/Timeline';
-import Steps from '@/views/Steps';
-import Cards from '@/views/Cards';
-import Mailbox from '@/views/Mailbox';
-import Page2 from '@/views/Page2';
+import Home from 'bundle-loader?lazy!../views/Home';
+import Form from 'bundle-loader?lazy!../views/Form';
+import Table from 'bundle-loader?lazy!../views/Table';
+import Calendar from 'bundle-loader?lazy!../views/Calendar';
+import Timeline from 'bundle-loader?lazy!../views/Timeline';
+import Steps from 'bundle-loader?lazy!../views/Steps';
+import Cards from 'bundle-loader?lazy!../views/Cards';
+import Mailbox from 'bundle-loader?lazy!../views/Mailbox';
+import Page2 from 'bundle-loader?lazy!../views/Page2';
 
 export const childRoutes = [
   {
     'path':'/home',
-    'component': Home,
+    'component': (props) => (
+      <Bundle load={Home}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
     'exactly': true
   },
   {
     'path':'/form',
-    'component': Form
+    'component': (props) => (
+      <Bundle load={Form}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/table',
-    'component': Table
+    'component': (props) => (
+      <Bundle load={Table}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/calendar',
-    'component': Calendar
+    'component': (props) => (
+      <Bundle load={Calendar}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/timeline',
-    'component': Timeline
+    'component': (props) => (
+      <Bundle load={Timeline}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/steps',
-    'component': Steps
+    'component': (props) => (
+      <Bundle load={Steps}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/cards',
-    'component': Cards
+    'component': (props) => (
+      <Bundle load={Cards}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/mailbox',
-    'component': Mailbox
+    'component': (props) => (
+      <Bundle load={Mailbox}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   },
   {
     'path':'/page2',
-    'component': Page2
+    'component': (props) => (
+      <Bundle load={Page2}>
+        {(Comp) => <Comp {...props}/>}
+      </Bundle>
+    ),
   }
 ];
 
