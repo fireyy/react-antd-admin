@@ -1,3 +1,7 @@
+>## This Project Is Deprecated. Use [Ant Design Pro](https://pro.ant.design) instead.
+
+>[Ant Design Pro](https://pro.ant.design) is a production-ready solution for admin interfaces. Built on the design principles developed by Ant Design, this project introduces higher level components; we have developed templates, components, and a corresponding design kit to improve the user and development experience for admin interfaces.
+
 ## React Ant.Design Admin UI
 
 <p align="center">
